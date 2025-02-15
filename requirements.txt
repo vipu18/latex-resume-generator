@@ -1,0 +1,9 @@
+streamlit
+jinja2
+pandas
+numpy
+python-docx
+reportlab
+requests
+pylatex
+pyyaml

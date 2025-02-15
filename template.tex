@@ -1,5 +1,4 @@
 \documentclass[a4paper,20pt]{article}
-
 \usepackage{latexsym}
 \usepackage[empty]{fullpage}
 \usepackage{titlesec}
@@ -12,7 +11,7 @@
 
 %==================== PAGE SETUP ====================
 \pagestyle{fancy}
-\fancyhf{} % clear all header and footer fields
+\fancyhf{} % clear header and footer
 \fancyfoot{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
@@ -42,11 +41,9 @@
 \newcommand{\resumeItem}[2]{%
   \item\small{\textbf{#1}: #2 \vspace{-2pt}}%
 }
-
 \newcommand{\resumeSubItem}[2]{%
   \resumeItem{#1}{#2}\vspace{-3pt}%
 }
-
 \newcommand{\resumeSubheading}[4]{%
   \vspace{-1pt}\item%
   \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}%
@@ -54,11 +51,10 @@
     \textit{#3} & \textit{#4} \\%
   \end{tabular*}\vspace{-5pt}%
 }
-
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}%
-\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}%
-\newcommand{\resumeItemListStart}{\begin{itemize}}%
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}%
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
 
 \begin{document}
 
@@ -70,24 +66,22 @@
 \end{tabular*}
 
 [% if education %]
-%==================== EDUCATION (LIKE EXPERIENCE) ====================
 \section{Education}
 \resumeSubHeadingListStart
   [% for edu in education %]
-    \resumeSubheading
-      {[[ edu.institution|latex_escape]]}{[[ edu.location|latex_escape]]}
-      {[[ edu.degree|latex_escape]]; GPA: [[ edu.gpa|latex_escape]]}{[[ edu.duration|latex_escape]]}
-    [% if edu.courses %]
-      \resumeItemListStart
-        \resumeItem{Courses}{[[ edu.courses|join(', ')|latex_escape]]}
-      \resumeItemListEnd
-    [% endif %]
-  [% endfor %]
+  \resumeSubheading
+    {[[ edu.institution|latex_escape]]}{[[ edu.location|latex_escape]]}
+    {[[ edu.degree|latex_escape]][% if edu.cgpa %]; CGPA: [[ edu.cgpa|latex_escape]][% endif %]}{[[ edu.duration|latex_escape]]}
+  [% if edu.courses %]
+    \resumeItemListStart
+      \resumeItem{Courses}{[[ edu.courses|join(', ')|latex_escape]]}
+    \resumeItemListEnd
+  [% endif %]
+[% endfor %]
 \resumeSubHeadingListEnd
 [% endif %]
 
 [% if skills %]
-%==================== SKILLS (BULLETS) ====================
 \section{Skills Summary}
 \resumeSubHeadingListStart
   [% for category, skill_list in skills.items() %]
@@ -97,7 +91,6 @@
 [% endif %]
 
 [% if experience %]
-%==================== EXPERIENCE (BULLETS) ====================
 \section{Experience}
 \resumeSubHeadingListStart
   [% for exp in experience %]
@@ -114,7 +107,6 @@
 [% endif %]
 
 [% if projects %]
-%==================== PROJECTS (BULLETS + TECH STACK) ====================
 \section{Projects}
 \resumeSubHeadingListStart
   [% for project in projects %]
@@ -126,9 +118,7 @@
 \resumeSubHeadingListEnd
 [% endif %]
 
-
 [% if publications %]
-%==================== PUBLICATIONS (BULLETS) ====================
 \section{Publications}
 \resumeSubHeadingListStart
   [% for pub in publications %]
@@ -138,23 +128,36 @@
 [% endif %]
 
 [% if honors %]
-%==================== HONORS & AWARDS (DESCRIPTION LIST) ====================
 \section{Honors and Awards}
-\begin{description}[font=$\bullet$]
-  [% for honor in honors %]
-    \item {[[ honor|latex_escape]]}
+\resumeSubHeadingListStart
+  [% for item in honors %]
+    \item \small{
+      \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+        \textbf{[[ item.title|latex_escape]]} & [[ item.year|latex_escape]] \\
+      \end{tabular*}
+    }
   [% endfor %]
-\end{description}
+\resumeSubHeadingListEnd
 [% endif %]
 
 [% if volunteer %]
-%==================== VOLUNTEER EXPERIENCE (LIKE EXPERIENCE) ====================
 \section{Volunteer Experience}
 \resumeSubHeadingListStart
   [% for vol in volunteer %]
     \resumeSubheading
       {[[ vol.organization|latex_escape]]}{[[ vol.location|latex_escape]]}
       {[[ vol.role|latex_escape]]}{[[ vol.duration|latex_escape]]}
+  [% endfor %]
+\resumeSubHeadingListEnd
+[% endif %]
+
+[% if certificates %]
+\section{Certificates}
+\resumeSubHeadingListStart
+  [% for cert in certificates %]
+    \resumeSubheading
+      {[[ cert.name|latex_escape]]}{[[ cert.issuer|latex_escape]]}
+      {\href{[[ cert.link|latex_escape]]}{Link}}{[[ cert.start_end|latex_escape]]}
   [% endfor %]
 \resumeSubHeadingListEnd
 [% endif %]
