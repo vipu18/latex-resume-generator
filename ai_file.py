@@ -69,7 +69,7 @@ def project_desc(project_title: str, user_skills: str, project_desc: str) -> str
     return (
         "You are an AI specialized in resume content. "
         "We have a project title, some additional skills, and a user-provided description. "
-        "Fix grammar/spelling, optimize for ATS usage, and produce a final short project description not exceeding 3 lines. "
+        "Fix grammar/spelling, optimize for ATS usage, and produce a final short project description min and max 3 lines. "
         "Make it concise and engaging.\n\n"
         f"Project Title: {project_title}\n"
         f"User-Defined Skills: {user_skills}\n"
@@ -80,7 +80,7 @@ def publication_desc(pub_title: str, pub_desc: str) -> str:
     return (
         "You are specialized in resume content. "
         "We have a publication title and a user-provided description. "
-        "Fix grammar/spelling, optimize for ATS usage, and produce a final short publication description not exceeding 3 lines. "
+        "Fix grammar/spelling, optimize for ATS usage, and produce a final short publication description min and max 3 lines. "
         "Make it concise and engaging.\n\n"
         f"Publication Title: {pub_title}\n"
         f"User Publication Description: {pub_desc}"
@@ -90,7 +90,7 @@ def experience_desc(company: str, detail_desc: str) -> str:
     return (
         "You are an AI specialized in resume content. "
         "We have a user-provided experience description for a company. "
-        "Fix grammar/spelling, optimize for ATS usage, and produce a final short experience description not exceeding 3 lines. "
+        "Fix grammar/spelling, optimize for ATS usage, and produce a final short experience description min and max 3 lines. "
         "Make it concise and engaging.\n\n"
         f"Company: {company}\n"
         f"Experience Description: {detail_desc}"
