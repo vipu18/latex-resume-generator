@@ -42,3 +42,5 @@ streamlit run app.py
 ![image](https://github.com/user-attachments/assets/8c899030-44fd-4a44-96bd-363ffd414b9d)
 ![image](https://github.com/user-attachments/assets/5ef50226-325f-4fe9-b27d-23095df54c1b)
 
+## Author
+Vipanshu Suman
