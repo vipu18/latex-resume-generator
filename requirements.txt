@@ -1,5 +1,6 @@
-streamlit
+flask
 jinja2
+streamlit
 pandas
 numpy
 python-docx

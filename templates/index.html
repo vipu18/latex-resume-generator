@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LaTeX Resume Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+<!-- Loading overlay -->
+<div id="loader">
+  <div class="loader-box">
+    <div class="spinner"></div>
+    <p>Generating your resume…</p>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div id="toast-container"></div>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-icon">R</div>
+    <span>ResumeGen</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="nav-link" href="#personal"><span class="dot"></span>Personal Info</a>
+    <a class="nav-link" href="#education"><span class="dot"></span>Education</a>
+    <a class="nav-link" href="#skills"><span class="dot"></span>Skills</a>
+    <a class="nav-link" href="#experience"><span class="dot"></span>Experience</a>
+    <a class="nav-link" href="#projects"><span class="dot"></span>Projects</a>
+    <a class="nav-link" href="#publications"><span class="dot"></span>Publications</a>
+    <a class="nav-link" href="#honors"><span class="dot"></span>Honors &amp; Awards</a>
+    <a class="nav-link" href="#volunteer"><span class="dot"></span>Volunteer</a>
+    <a class="nav-link" href="#certificates"><span class="dot"></span>Certificates</a>
+  </nav>
+  <div class="sidebar-footer">
+    <button id="generate-btn" class="btn-generate" onclick="generateResume()">
+      Generate Resume
+    </button>
+  </div>
+</aside>
+
+<!-- Main content -->
+<main class="main-content">
+
+  <div class="page-header">
+    <h1>Build Your Resume</h1>
+    <p>Fill in your details, let AI polish the descriptions, then generate a professional PDF.</p>
+  </div>
+
+  <!-- Personal Info -->
+  <section id="personal" class="card">
+    <div class="card-header"><h2>Personal Information</h2></div>
+    <div class="form-grid two-col">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="name" value="Jane Doe" placeholder="Jane Doe" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="email" value="jane.doe@example.com" placeholder="jane.doe@example.com" />
+      </div>
+      <div class="form-group">
+        <label>Mobile</label>
+        <input type="text" id="mobile" value="+918765431210" placeholder="+1 234 567 8900" />
+      </div>
+      <div class="form-group">
+        <label>Portfolio URL</label>
+        <input type="text" id="portfolio" value="janedoeportfolio.com" placeholder="yourportfolio.com" />
+      </div>
+      <div class="form-group">
+        <label>GitHub URL</label>
+        <input type="text" id="github" value="github.com/janedoe" placeholder="github.com/username" />
+      </div>
+      <div class="form-group">
+        <label>LinkedIn URL</label>
+        <input type="text" id="linkedin" value="linkedin.com/in/janedoe" placeholder="linkedin.com/in/username" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education" class="card">
+    <div class="card-header">
+      <h2>Education</h2>
+      <button class="btn-add" onclick="addEntry('education')">+ Add</button>
+    </div>
+    <div id="education-entries"></div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="card">
+    <div class="card-header"><h2>Skills</h2></div>
+    <div class="ai-row">
+      <div class="form-group" style="flex:1">
+        <label>All Skills (comma separated)</label>
+        <input type="text" id="raw-skills"
+          value="Python, Java, JavaScript, React, Django, TensorFlow, Git, Docker, VS Code, Linux, AWS, Windows, Leadership, Teamwork, Communication"
+          placeholder="Python, React, Docker, …" />
+      </div>
+      <button class="btn-ai" id="ai-categorize-btn" onclick="categorizeSkills()">AI Categorize</button>
+    </div>
+    <div class="skills-grid">
+      <div class="form-group"><label>Languages</label><textarea id="skills-Languages" rows="2" placeholder="Python, Java, JavaScript"></textarea></div>
+      <div class="form-group"><label>Frameworks</label><textarea id="skills-Frameworks" rows="2" placeholder="React, Django, Flask"></textarea></div>
+      <div class="form-group"><label>Tools</label><textarea id="skills-Tools" rows="2" placeholder="Git, Docker, VS Code"></textarea></div>
+      <div class="form-group"><label>Platforms</label><textarea id="skills-Platforms" rows="2" placeholder="Linux, AWS, Windows"></textarea></div>
+      <div class="form-group"><label>Soft Skills</label><textarea id="skills-Soft-Skills" rows="2" placeholder="Leadership, Communication"></textarea></div>
+      <div class="form-group"><label>Others</label><textarea id="skills-Others" rows="2" placeholder="Any other skills"></textarea></div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="card">
+    <div class="card-header">
+      <h2>Experience</h2>
+      <button class="btn-add" onclick="addEntry('experience')">+ Add</button>
+    </div>
+    <div id="experience-entries"></div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="card">
+    <div class="card-header">
+      <h2>Projects</h2>
+      <button class="btn-add" onclick="addEntry('projects')">+ Add</button>
+    </div>
+    <div id="projects-entries"></div>
+  </section>
+
+  <!-- Publications -->
+  <section id="publications" class="card">
+    <div class="card-header">
+      <h2>Publications</h2>
+      <button class="btn-add" onclick="addEntry('publications')">+ Add</button>
+    </div>
+    <div id="publications-entries"></div>
+  </section>
+
+  <!-- Honors -->
+  <section id="honors" class="card">
+    <div class="card-header">
+      <h2>Honors &amp; Awards</h2>
+      <button class="btn-add" onclick="addEntry('honors')">+ Add</button>
+    </div>
+    <div id="honors-entries"></div>
+  </section>
+
+  <!-- Volunteer -->
+  <section id="volunteer" class="card">
+    <div class="card-header">
+      <h2>Volunteer Experience</h2>
+      <button class="btn-add" onclick="addEntry('volunteer')">+ Add</button>
+    </div>
+    <div id="volunteer-entries"></div>
+  </section>
+
+  <!-- Certificates -->
+  <section id="certificates" class="card">
+    <div class="card-header">
+      <h2>Certificates</h2>
+      <button class="btn-add" onclick="addEntry('certificates')">+ Add</button>
+    </div>
+    <div id="certificates-entries"></div>
+  </section>
+
+  <!-- Results -->
+  <section id="results" class="card results-card" style="display:none;">
+    <div class="card-header">
+      <h2>Your Resume</h2>
+      <button class="btn-download" onclick="downloadPDF()">⬇ Download PDF</button>
+    </div>
+    <div id="pdf-container" class="pdf-container">
+      <iframe id="pdf-iframe" frameborder="0" title="Resume Preview"></iframe>
+    </div>
+    <details class="tex-details">
+      <summary>View LaTeX Source</summary>
+      <textarea id="tex-source" class="tex-source" readonly></textarea>
+    </details>
+  </section>
+
+</main>
+
+<script src="https://js.puter.com/v2/"></script>
+<script src="/static/js/main.js"></script>
+</body>
+</html>
